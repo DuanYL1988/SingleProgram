@@ -1,0 +1,84 @@
+.condition {
+  position: relative;
+}
+
+.condition > view {
+  display: inline-block;
+}
+
+.weaponIcon {
+  margin-left: 5rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.searchIcon {
+  margin-bottom: -13rpx;
+}
+
+.skinList {
+  height: 80rpx;
+  z-index: 1;
+  position: absolute;
+  top: 5rpx;
+  right: 10rpx;
+}
+
+.card {
+  border: 5rpx solid#efd448;
+  border-radius: 10rpx;
+  width: 98%;
+  margin-top: 5rpx;
+  background-color: rgba(110, 115, 107, 0.7);
+  border-style: double;
+}
+
+.card-line > button {
+  background-color: rgb(215, 194, 235);
+}
+
+.title {
+  color: #010054;
+  font-size: larger!important;
+  font-weight: bolder;
+}
+
+.name {
+  color: #fffcad;
+  font-size: larger!important;
+  font-weight: bolder;
+}
+
+.card>view {
+  display: inline-block;
+}
+
+.infoIcon {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.faceImg {
+  width: 220rpx;
+  height: 280rpx;
+  background-color: beige;
+}
+
+.faceIcon {
+  position: relative;
+}
+
+.faceIcon>.infoIcon {
+  position: absolute;
+}
+
+.card-line>label {
+  padding-left: 10rpx;
+  font-size: small;
+}
+
+.weapon-name {
+  color: rgb(239 236 236);
+  font-size: 15px;
+  font-weight: bolder;
+}

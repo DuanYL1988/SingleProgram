@@ -1,0 +1,23 @@
+<view>
+    <!-- 轮播图 
+        indicator-dots(导航圆点)
+        circular 衔接滑动
+    -->
+    <swiper indicator-dots autoplay interval="2000" circular="true">
+        <swiper-item wx:for="{{menuList}}" wx:key="menuSwiper"  circular>
+          <navigator class="swiperNav" url="{{item.route}}">
+            <image mode="widthFix" src="{{item.banner}}"></image>
+          </navigator>
+        </swiper-item>
+    </swiper>
+    <view class="btnView" wx:for="{{menuList}}" wx:key="linkIcon">
+        <navigator url="{{item.route}}">
+          <image class="appIcon" src="{{item.icon}}"></image>
+        </navigator>
+        <view class="appName">{{item.name}}</view>
+    </view>
+    <!--  https://static.wikia.nocookie.net/gensin-impact/images/2/24/Ganyu_Card.png   
+    https://m.qpic.cn/psc?/V51v220v2C0E493HVi1R4bhVpB3wcZ8H/LiySpxowE0yeWXwBdXN*ST5mwxdd69fc9F0HKhBKZTN2uXlJmS*N7a7zsM92GWRweTgmTVRzpQyCYYjn0UHTHhOJUc4DzrHqqX475UEgavw!/b&bo=OASABzgEgAcDByI!&rf=viewer_4
+      <image mode="widthFix" src="https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/a/ae/Shez_Snowfield_Envoy_Face.webp/revision/latest/scale-to-width-down/1000?cb=20241213044126" />
+     -->
+</view>

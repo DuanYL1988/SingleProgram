@@ -1,0 +1,25 @@
+/* pages/glanblueFantasy/index.wxss */
+.card {
+  display: inline-block;
+  position:relative;
+  width: 180rpx;
+}
+.card>view {
+  height:180rpx;
+  width: 100%;
+}
+
+.faceImg {
+  width: 100%;
+  height: 100%;
+}
+
+.infoArea {
+  position:absolute;
+  left : 0px;
+}
+.name {
+  color : white !important;
+  font-size : 30rpx !important;
+  background: #523d3dbf !important;
+}

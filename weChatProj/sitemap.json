@@ -1,0 +1,7 @@
+{
+  "desc": "手游立绘",
+  "rules": [{
+  "action": "allow",
+  "page": "*"
+  }]
+}

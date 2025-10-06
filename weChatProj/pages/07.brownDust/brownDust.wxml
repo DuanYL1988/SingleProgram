@@ -1,0 +1,22 @@
+<!-- 条件 -->
+<view class="condition">
+  <view>
+  </view>
+</view>
+
+<!-- 一览 -->
+<scroll-view class="row" style="max-height: 100%;border: 3rpx solid skyblue;" scroll-y>
+  <block wx:for="{{dataList}}" wx:key="index">
+    <view class="card" mut-bind:tap="getImgBox" data-acter="{{item}}">
+      <view class="faceIcon">
+        <image referrerPolicy="no-referrer" class="faceImg" src="{{item.cardImg}}" />
+      </view>
+
+      <view class="infoArea" style="vertical-align:top;">
+        <view class="card-line">
+          <label class="name">{{item.name}}</label>
+        </view>
+      </view>
+    </view>
+  </block>
+</scroll-view>

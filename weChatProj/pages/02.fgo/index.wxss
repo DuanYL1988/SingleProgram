@@ -1,0 +1,32 @@
+/* pages/fgo/index.wxss */
+.searchIcon {
+  margin-left: 1rpx;
+}
+
+.condition {
+  height: 60rpx;
+}
+
+.faceImg {
+  width: 190rpx;
+  height: 210rpx;
+  border: 0rpx;
+}
+
+.card-line>.name {
+  color: white;
+  font-size: 32rpx;
+  font-weight: bolder;
+  font-family: fangsong;
+}
+
+.stageBtn {
+  width: 85rpx!important;
+  font-size: 20rpx!important;
+  margin-left: 5rpx;
+}
+
+.searchBtn {
+  height: 45rpx;
+  width: 90rpx;
+}

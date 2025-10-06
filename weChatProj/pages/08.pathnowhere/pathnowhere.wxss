@@ -1,0 +1,25 @@
+/* pages/glanblueFantasy/index.wxss */
+.card {
+  display: inline;
+  position:relative;
+  overflow: hidden;
+}
+.card>view {
+  width: 240rpx;
+  height: 380rpx;
+  overflow: hidden;
+}
+.card>view>image{
+  width: 100%;
+  height: 100%;
+}
+
+.infoArea {
+  position:absolute;
+  left : 10px;
+}
+.name {
+  color : #1d0605 !important;
+  font-size : 30rpx !important;
+  background: #ffffffbf !important;
+}

@@ -1,0 +1,108 @@
+/** 全局css **/
+page {
+  background: url(http://m.qpic.cn/psc?/V51v220v2C0E493HVi1R4bhVpB2uqOS1/bqQfVz5yrrGYSXMvKr.cqY6G86vx90y.6DC5tUWkQB3UzwEA0kH4r0jI5FqQZoy*eKBRI.QywhDJkcjJK8cIZ*Xm.CgO4f0uyIj.2zxelVM!/b&bo=*gE.A*4BPgMDByI!&rf=viewer_4);
+}
+/* label向上靠齐 */
+label {vertical-align:top}
+
+/* 条件检索按钮 */
+.searchBtn {
+  display: inline-block;
+  width: 105rpx;
+  height: 50rpx;
+  background-color: #b1caef;
+  margin-left: 5rpx;
+  border-radius: 10rpx;
+  border: 1rpx solid black;
+  font-size: 25rpx;
+  align-items: center;
+  position: relative;
+}
+/* 条件检索按钮内文字 */
+.searchBtn>text{
+  position: absolute;
+  left: 15%;
+  top: 15%
+}
+
+/** 轮播图Start **/
+swiper-item>image {
+  width: 100%;
+}
+.albumBox {
+  height: 1450rpx
+}
+.albumBoxItem {
+  display:flex;align-items: center;justify-content: center;
+}
+.albumBoxImg {
+  height: 1450rpx;width: 800px;
+}
+/** 轮播图 End **/
+
+swiper {
+  background-color: rgb(204, 218, 235);
+}
+.condition > label {
+  margin-left: 10rpx;
+}
+.searchIcon {
+  height:50rpx;width: 50rpx;margin-left: 10rpx;
+}
+
+/* 头像 */
+.faceImg {
+  width: 100rpx;
+  height: 100rpx;
+  display: inline-block;
+  margin-left: 5px;
+  border: 2px solid #7090e6;
+  border-radius: 5px;
+}
+
+/* 图标 */
+.iconImg {
+  width: 75rpx;
+  height: 75rpx;
+  display: inline-block;
+  margin-left: 5rpx;
+  border-radius: 30px;
+  border: solid 4rpx rgb(179, 161, 161);
+  background-color: rgb(28, 127, 131);
+}
+
+/* 一览信息块 */
+.card {
+  border: 5rpx solid#efd448;
+  border-radius: 10rpx;
+  width: 98%;
+  margin-top: 5rpx;
+  background-color: rgba(110, 115, 107, 0.7);
+  border-style: double;
+}
+.card>view {
+  display: inline-block;
+  vertical-align: top;
+}
+.card-line {
+  display: block;
+}
+.card-line > button {
+  background-color: rgb(215, 194, 235);
+}
+.card-line > .title {
+  color: #010054;
+  font-size: larger;
+  font-weight: bolder;
+}
+.card-line > .name {
+  color: #fffcad;
+  font-size: larger;
+  font-weight: bolder;
+}
+.card-line>label {
+  padding-left: 10rpx;
+  font-size: small;
+}
+
+

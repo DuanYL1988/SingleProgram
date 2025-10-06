@@ -1,0 +1,100 @@
+.condition {
+  position: relative;
+}
+
+.condition>view {
+  display: inline-block;
+}
+
+.weaponIcon {
+  margin-left: 5rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.searchIcon {
+  margin-bottom: -13rpx;
+  margin-left: 5rpx;
+}
+
+.skinList {
+  height: 80rpx;
+  z-index: 1;
+  position: absolute;
+  top: 5rpx;
+  right: 10rpx;
+}
+
+.card {
+  border: 5rpx solid#efd448;
+  border-radius: 10rpx;
+  width: 98%;
+  margin-top: 5rpx;
+  background-color: rgba(110, 115, 107, 0.7);
+  border-style: double;
+}
+
+.title {
+  color: #010054;
+  font-size: 30rpx !important;
+  font-weight: bolder;
+}
+
+.name {
+  color: #fffcad;
+  font-size: 30rpx !important;
+  font-weight: bolder;
+}
+
+.card>view {
+  display: inline-block;
+}
+
+.infoIcon {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.faceImg {
+  width: 180rpx;
+  height: 180rpx;
+  background-color: #dcdcec;
+}
+
+.faceIcon {
+  position: relative;
+  top: -5rpx;
+}
+
+.faceIcon:after {
+  content: "";
+  position: absolute;
+  top: -15rpx;
+  left: -10rpx;
+  width: 110%;
+  height: 110%;
+  background: url(https://fire-emblem-heroes.com/common/img/sp/index/characterSlide/character_thumb_frame_active.png)no-repeat;
+  background-size: 100%;
+}
+
+.faceIcon>.infoIcon {
+  position: absolute;
+  z-index: 2;
+}
+
+.card-line>label {
+  padding-left: 10rpx;
+  font-size: small;
+  color: azure;
+}
+
+.weapon-name {
+  color: rgb(0 0 0) !important;
+  font-size: 30rpx !important;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bolder;
+}
+
+.detailAttr {
+  height: 30rpx;
+}

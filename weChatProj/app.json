@@ -1,0 +1,27 @@
+{
+  "pages": [
+    "pages/00.index/index",
+    "pages/01.feh/feh",
+    "pages/02.fgo/index",
+    "pages/03.snowBreak/snowBreak",
+    "pages/03.azurlane/azurlane",
+    "pages/04.glanblueFantasy/index",
+    "pages/05.genshin/genshin",
+    "pages/06.honorKing/honorKing",
+    "pages/06.crazyones/crazyones",
+    "pages/07.brownDust/brownDust",
+    "pages/08.pathnowhere/pathnowhere",
+    "pages/logs/logs",
+    "pages/sample/sample"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "立绘查看",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": false
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

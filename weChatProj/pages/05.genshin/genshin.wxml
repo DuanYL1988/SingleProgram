@@ -1,0 +1,27 @@
+<!-- 条件 -->
+<view class="condition" style="height: 120rpx;margin-left: 10rpx;">
+  <view>
+  </view>
+</view>
+
+<!-- 一览 -->
+<scroll-view class="row" style="max-height: 690px;border: 3rpx solid skyblue;" scroll-y>
+  <block wx:for="{{dataList}}" wx:key="index">
+    <view class="card">
+      <view class="faceIcon">
+        <image class="faceImg" src="{{item.faceImgUrl}}"/>
+      </view>
+      <view class="infoArea" style="vertical-align:top;margin-top:5px">
+        <view class="card-line">
+          <label class="name">{{item.name}}</label>
+        </view>
+        <view class="card-line">
+          <button size="mini" wx:if="{{item['imgBox'].length > 0}}" style="width: 80px;" bindtap="getImgBox" data-data="{{item}}" data-type="imgBox">普通立绘</button>
+          <button size="mini" wx:if="{{item['birthday'].length > 0}}" bindtap="getImgBox" style="margin-left: 20px;width: 80px;" data-data="{{item}}" data-type="birthday">生日立绘</button>
+          <button size="mini" wx:if="{{item['artwork'].length > 0}}" bindtap="getImgBox" style="margin-left: 20px;width: 80px;" data-data="{{item}}" data-type="artwork">节日立绘</button>
+        </view>
+      </view>
+    </view>
+
+  </block>
+</scroll-view>

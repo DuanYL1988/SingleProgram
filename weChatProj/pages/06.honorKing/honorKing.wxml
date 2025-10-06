@@ -1,0 +1,42 @@
+<!-- 条件 -->
+<view class="condition" style="margin-left: 10rpx;">
+  <view class="searchIcon"></view>
+  <view class="searchIcon job2"></view>
+  <view class="searchIcon job3"></view>
+  <view class="searchIcon job4"></view>
+  <view class="searchIcon job5"></view>
+  <view class="searchIcon job6"></view>
+</view>
+
+<!-- 一览 -->
+<scroll-view class="row" style="max-height: 750px;border: 3rpx solid skyblue;" scroll-y>
+  <block wx:for="{{dataList}}" wx:key="index">
+    <view class="card">
+      <view class="faceIcon" mut-bind:tap="getImgBox" data-data="{{item}}">
+        <image class="faceImg" referrerPolicy="no-referrer" src="{{item.faceImgUrl}}"/>
+      </view>
+      <view class="infoArea" style="vertical-align:top;margin-top:5px">
+        <view class="card-line">
+          <label class="name">{{item.name}}</label>
+        </view>
+        <view class="card-line">
+        </view>
+        <view class="card-line">
+        </view>
+        <view class="card-line" style="padding-left: 30px;">
+        </view>
+      </view>
+    </view>
+
+  </block>
+</scroll-view>
+
+<view style="position: relative">
+  <!-- 轮播图 -->
+  <swiper id="artImgBox" wx:if="{{skinImgBox.length > 0}}" class="albumBox" style="margin-top: 10rpx;" current="0" indicator-dots circular>
+    <swiper-item class="albumBoxItem" wx:for="{{skinImgBox}}" wx:key="index">
+      <image class="transverseImage" mode="aspectFit" src="{{item}}" />
+    </swiper-item>
+  </swiper>
+
+</view>

@@ -1,0 +1,50 @@
+<!-- 条件 -->
+<view class="condition">
+  <view>
+    <block wx:for="{{classType}}" wx:key="index">
+      <image class="searchIcon" src="{{item.imgSrc}}" mut-bind:tap="doSearch" data-key="class" data-value="{{item.param}}" />
+    </block>
+  </view>
+
+  <view style="float: right; margin-top: -50rpx;">
+    <button size="mini" style="background-color: #7665ff;width: 90rpx;height: 50rpx;font-size: small;margin-left: 20rpx;color: white;" bindtap="doSearch" data-key="clean">清除</button>
+  </view>
+</view>
+
+<!-- 一览 -->
+<scroll-view class="row" style="max-height: 690px;border: 3rpx solid skyblue;" scroll-y>
+  <block wx:for="{{originDataList}}" wx:key="index" wx:for-index="dataIndex">
+    <view class="card">
+      <view class="faceIcon">
+        <image class="faceImg" mut-bind:tap="doSearch" data-key="name" data-value="{{item.name}}" src="{{item.icon[item.selectStage]}}" />
+      </view>
+      <view class="infoArea">
+        <view class="card-line">
+          <label class="name">{{item.nameCn}}</label>
+        </view>
+        <view class="card-line">
+          <label>{{item.nameJp}}</label>
+        </view>
+        <view class="card-line">
+          <label>{{item.name}}</label>
+        </view>
+        <view class="card-line">
+          <label>HP : {{item.hp}} / ATK : {{item.atk}}</label>
+        </view>
+        <view class="card-line">
+          <view mut-bind:tap="showImgBox" data-servant="{{item}}" class="searchBtn"><text>立绘</text></view>
+        </view>
+      </view>
+    </view>
+
+  </block>
+</scroll-view>
+
+<view style="position: relative;">
+  <!-- 轮播图 -->
+  <swiper id="bannerIllm" class="albumBox" style="padding-top: 90rpx;" current="0" indicator-dots circular>
+    <swiper-item class="albumBoxItem" wx:for="{{bannerImages}}" wx:key="index">
+      <image class="albumBoxImg" mode="aspectFill" src="{{item}}" />
+    </swiper-item>
+  </swiper>
+</view>

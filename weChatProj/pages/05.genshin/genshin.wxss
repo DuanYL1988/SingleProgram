@@ -1,0 +1,12 @@
+/* pages/genshin.wxss */
+button {
+  font-size: 13px !important;
+  width: 75px !important;
+  margin-left: 5rpx !important;
+}
+
+.faceImg {
+  width: 110px;
+  height: 130px;
+  background-color: #ffffffd6;
+}

@@ -1,0 +1,35 @@
+swiper {
+  height: 130px;
+  border-bottom: solid 2px #9eb753;
+}
+
+.swiperNav>image {
+  height: 130px;
+  width: 100%;
+}
+
+.appIcon {
+  width: 150rpx;
+  height: 150rpx;
+  margin : 25rpx 0 0 25rpx;
+  border: 5rpx solid #373c2e;
+  border-radius: 30rpx;
+  box-shadow: 2px 2px 6px 1px #c56e6e;
+}
+
+.appName {
+  text-align: center;
+  font-size: 30rpx;
+  position: absolute;
+  width: 100%;
+  left: 10rpx;
+  font-weight: bolder;
+  color: #19120b;
+  text-shadow: 2px 2px 5px #ce4b4b;
+}
+
+.btnView {
+  display: inline-block;
+  position: relative;
+  margin-top: 20rpx;
+}
