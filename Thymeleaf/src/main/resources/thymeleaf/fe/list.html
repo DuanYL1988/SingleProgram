@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- 引入thymeleaf的th标签 -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:include="./common/resources.html"></th:block>
+</head>
+
+<body class="fireemblem">
+    <th:block th:include="./common/header.html"></th:block>
+    <!-- 主体 -->
+    <div th:fragment="content">
+        <div class="searchArea">
+            <span>SearchArea</span>
+        </div>
+
+        <div class="resultArea" style="height:350px;overflow-y:scroll">
+            <table cellspacing="0" border="1" >
+                <thead>
+                    <tr>
+                        <th rowspan="2">头像</th>
+                        <th th:each="title : ${titleList }" th:text="${title.comment }"></th>
+                    </tr>
+                    <tr>
+                        <th>生命</th>
+                        <th>攻击</th>
+                        <th>防御</th>
+                        <th>速度</th>
+                        <th>魔防</th>
+                        <th>技能A</th>
+                        <th>技能B</th>
+                        <th>技能C</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <th:block th:each="hero,iterStat : ${searchList }">
+                    <tr th:class="${iterStat.odd } ? 'alt'">
+                        <td rowspan="2"><img th:src="${imgHost + hero.faceImgUrl.replace('{key}',hero.imgName + '_Face_FC.webp')}"</td>
+                        <td th:text="${hero.titleName}"></td>
+                        <td th:text="${hero.name}"></td>
+                        <td th:text="${hero.nameCn}"></td>
+                        <td th:text="${hero.origin}"></td>
+                        <td th:text="${hero.heroType}"></td>
+                        <td th:text="${hero.moveType}"></td>
+                        <td th:text="${hero.weaponType}"></td>
+                        <td th:text="${hero.releaseDate}"></td>
+                    </tr>
+                    <tr th:class="${iterStat.odd } ? 'alt'">
+                        <td th:text="${hero.hp}"></td>
+                        <td th:text="${hero.attact}"></td>
+                        <td th:text="${hero.speed}"></td>
+                        <td th:text="${hero.def}"></td>
+                        <td th:text="${hero.mdf}"></td>
+                        <td th:text="${hero.skillA}"></td>
+                        <td th:text="${hero.skillB}"></td>
+                        <td th:text="${hero.skillC}"></td>
+                    </tr>
+                    </th:block>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <th:block th:include="common/footer.html"></th:block>
+</body>
+</html>

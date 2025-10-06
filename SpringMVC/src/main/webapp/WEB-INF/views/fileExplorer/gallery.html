@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>相册</title>
+<style>
+main{text-align:center}
+#navite {background-color:#99bfbc;overflow-x:scroll;height:140px;position:fixed;bottom:10px;right:20px}
+#navImg {float:left}
+#navImg img{width:auto;height:120px;}
+.showWindow {margin-top:-10px}
+.showFullWindow {text-align:center}
+</style>
+<script src="../../../resources/js/jquery-3.4.1.min.js" th:src="@{/resources/js/jquery-3.4.1.min.js}"></script>
+<script src="../../../resources/js/commonService.js" th:src="@{/resources/js/commonService.js}"></script>
+<!--
+-->
+<script th:inline="javascript">
+    var path = [[${folder}]];
+    var type = [[${type}]];
+    var height = [[${height}]];
+</script>
+<script src="../../../resources/js/hero/gallery.js" th:src="@{/resources/js/hero/gallery.js}"></script>
+</head>
+<body style="background: #decfcf">
+  <main>
+    <div id="showWindow" class="showWindow" onclick="showInWindows()">
+      <img src='' id='showFullImg'/>
+    </div>
+    <div id="navite" style="display:none">
+      <div id="navImg"></div>
+    </div>
+  </main>
+</body>
+</html>

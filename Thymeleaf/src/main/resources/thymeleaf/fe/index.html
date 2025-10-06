@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!-- 引入thymeleaf的th标签 -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:include="./common/resources.html"></th:block>
+<style>
+.parentMenu>ul {
+    display: none
+}
+</style>
+<script type="text/javascript" th:src="@{/js/page/index.js}"></script>
+<script th:inline="javascript">
+
+</script>
+</head>
+
+<body class="fireemblem">
+    <th:block th:include="./common/header.html"></th:block>
+    <form method="post" th:action="@{/fe/regist/regist}" th:object="${fireemblemHero}">
+        <div class="inputRow">
+            <div class="inputCell">
+                <label class="nessary">称号</label>
+                <input id="titleName" th:field="*{titleName}"></input>
+                <div class="errorMsg" th:if="${#fields.hasErrors('titleName')}" th:errors="*{titleName}"></div>
+            </div>
+        </div>
+        <div class="inputRow">
+            <input type="submit" value="提交"></input>
+        </div>
+    </form>
+
+    <th:block th:include="common/footer.html"></th:block>
+</body>
+</html>

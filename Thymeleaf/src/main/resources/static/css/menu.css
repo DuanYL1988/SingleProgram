@@ -1,0 +1,37 @@
+/* MENU */
+.menuBar {
+    width : 20%;
+    min-width : 180px;
+    overflow-y : scroll
+}
+
+.parentMenu {
+    background-color: #dce3e3a6;
+    display: flow-root;
+    border-bottom: solid 1px black;
+}
+
+.parentMenu:hover {
+    background-color: #efc49270;
+}
+
+.parentMenu>span {
+    font-size: 25px;
+}
+
+.parentMenu>div {
+    font-size: 18px;
+    background-color: #6663697a;
+    border-top: solid 1px #2627265e;
+}
+
+.parentMenu>div:hover {
+    background-color: #91cbcb
+}
+
+.parentMenu>div>img {
+    width: 25px;
+    border-radius: 5px;
+    padding-left: 20px;
+}
+/* Menu End*/

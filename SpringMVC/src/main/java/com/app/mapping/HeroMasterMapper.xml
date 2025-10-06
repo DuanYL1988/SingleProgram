@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//MYBATIS.org//DTD Mapper 3.0//EN" "http://MYBATIS.org/dtd/MYBATIS-3-mapper.dtd" >
+<mapper namespace="com.app.repository.HeroMasterRepository" >
+  <resultMap id="HeroMasterResultMap" type="com.app.model.HeroMaster" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ORIGIN_ID" property="originId" jdbcType="VARCHAR" />
+    <result column="ORIGIN_NAME" property="originName" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="select_column_list">
+    HERO_MASTER.ID
+    ,HERO_MASTER.ORIGIN_ID
+    ,HERO_MASTER.ORIGIN_NAME
+    ,HERO_MASTER.NAME
+  </sql>
+
+  <sql id="insert_column_list">
+    ID
+    ,ORIGIN_ID
+    ,ORIGIN_NAME
+    ,NAME
+  </sql>
+
+  <select id="selectOneById" resultMap="HeroMasterResultMap">
+    SELECT
+      <include refid="select_column_list"></include>
+    FROM 
+      HERO_MASTER
+    WHERE
+      ID = #{id}
+  </select>
+
+  <select id="selectOneByUniqueKey" resultMap="HeroMasterResultMap">
+    SELECT
+      <include refid="select_column_list"></include>
+    FROM 
+      HERO_MASTER
+    <where>
+      <if test="originId!=null">
+        AND ORIGIN_ID = #{originId}
+      </if>
+      <if test="name!=null">
+        AND NAME = #{name}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByDto" parameterType="com.app.model.HeroMaster" resultMap="HeroMasterResultMap">
+    SELECT
+      <include refid="select_column_list"></include>
+    FROM 
+      HERO_MASTER
+    <where>
+      <if test="id!=null">
+        AND ID = #{id}
+      </if>
+      <if test="originId!=null">
+        AND ORIGIN_ID = #{originId}
+      </if>
+      <if test="originName!=null">
+        AND ORIGIN_NAME = #{originName}
+      </if>
+      <if test="name!=null">
+        AND NAME = #{name}
+      </if>
+    </where>
+    <if test="orderBy!=null">
+      ORDER BY ${orderBy}
+    </if>
+  </select>
+
+  <select id="uniqueCheck"  resultType="Integer">
+    SELECT count(*) AS count
+    FROM 
+      HERO_MASTER
+    <where>
+      <if test="originId!=null">
+        AND ORIGIN_ID = #{originId}
+      </if>
+      <if test="name!=null">
+        AND NAME = #{name}
+      </if>
+    </where>
+  </select>
+
+  <update id="update" parameterType="com.app.model.HeroMaster" >
+    UPDATE
+      HERO_MASTER
+    <set>
+      <if test="originId!=null">
+        ORIGIN_ID = #{originId},
+      </if>
+      <if test="originName!=null">
+        ORIGIN_NAME = #{originName},
+      </if>
+      <if test="name!=null">
+        NAME = #{name},
+      </if>
+    </set>
+    WHERE
+      ID = #{id}
+  </update>
+
+  <insert id="insert" parameterType="com.app.model.HeroMaster" >
+        <selectKey resultType="java.lang.Integer" order="BEFORE" keyProperty="id">
+          SELECT SEQ_HERO_MASTER.NEXTVAL FROM DUAL
+        </selectKey>
+    INSERT INTO HERO_MASTER(
+    <include refid="insert_column_list"></include>
+    ) SELECT 
+       #{id}
+      , #{originId}
+      , #{originName}
+      , #{name}
+     FROM DUAL 
+     WHERE 1=1 
+     AND NOT EXISTS 
+     (SELECT 1 FROM HERO_MASTER
+         WHERE 1=1 
+         AND ORIGIN_ID = #{originId} 
+         AND NAME = #{name} )
+     AND ROWNUM = 1
+  </insert>
+</mapper>
+

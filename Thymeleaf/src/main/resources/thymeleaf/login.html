@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- 引入thymeleaf的th标签 -->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <th:block th:include="common/resources.html"></th:block>
+        <style>
+            .centerContent {width: 80px; height: 30px;}
+        </style>
+        <script type="text/javascript" th:src="@{/js/page/login.js}"></script>
+    </head>
+
+    <body class="general">
+        <th:block th:include="common/header.html"></th:block>
+
+        <div class="centerWindow" style="width:400px;height: 250px;" >
+            <div class="block-title">
+                <div style="display:inline">
+                    <label style="font-size:20px;" th:text="message">{{title}}</label>
+                </div>
+            </div>
+            
+            <div style="width: 100%;">
+                <form id="loginForm" th:action="@{/homepage}" method="post">
+                <div class="inputRow">
+                    <div class="inputCell">
+                        <label>选择应用</label>
+                        <select name="userGroup" style="width: 160px">
+                            <option></option>
+                            <option value="administrator">管理员</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="inputRow regist">
+                    <div class="inputCell">
+                        <label class="nessary">用户</label>
+                        <input type="text" name="userName" style="width: 155px" placeholder="请输入用户名"></input>
+                    </div>
+                </div>
+
+                <div class="inputRow regist">
+                    <div class="inputCell">
+                        <label class="nessary">密码</label>
+                        <input type="password" style="width: 155px" name="password"></input>
+                    </div>
+                </div>
+
+                <div class="inputRow">
+                    <div class="inputCell" style="padding-left: 90px;" >
+                        <button type="button" class="centerContent" onclick="login('1')">登录</button>
+                    </div>
+                    <div class="inputCell">
+                        <button type="button" class="centerContent" onclick="login('0')">注册</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+
+        <th:block th:include="common/footer.html"></th:block>
+    </body>
+</html>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//MYBATIS.org//DTD Mapper 3.0//EN" "http://MYBATIS.org/dtd/MYBATIS-3-mapper.dtd" >
+<mapper namespace="com.app.repository.HonorkingsRepository" >
+  <!-- ResultMap -->
+  <resultMap id="HonorkingsResultMap" type="com.app.model.Honorkings" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="VOCATION" property="vocation" jdbcType="VARCHAR" />
+    <result column="SUBVOCATION" property="subvocation" jdbcType="VARCHAR" />
+    <result column="SKILLCD1" property="skillcd1" jdbcType="VARCHAR" />
+    <result column="SKILLCD2" property="skillcd2" jdbcType="VARCHAR" />
+    <result column="SKILLCD3" property="skillcd3" jdbcType="VARCHAR" />
+    <result column="SKILLCD4" property="skillcd4" jdbcType="VARCHAR" />
+    <result column="IMGPATH" property="imgpath" jdbcType="VARCHAR" />
+    <result column="SKIN" property="skin" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="select_column_list">
+    HONORKINGS.ID
+    ,HONORKINGS.NAME
+    ,HONORKINGS.VOCATION
+    ,HONORKINGS.SUBVOCATION
+    ,HONORKINGS.SKILLCD1
+    ,HONORKINGS.SKILLCD2
+    ,HONORKINGS.SKILLCD3
+    ,HONORKINGS.SKILLCD4
+    ,HONORKINGS.IMGPATH
+    ,HONORKINGS.SKIN
+  </sql>
+
+  <sql id="insert_column_list">
+    ID
+    ,NAME
+    ,VOCATION
+    ,SUBVOCATION
+    ,SKILLCD1
+    ,SKILLCD2
+    ,SKILLCD3
+    ,SKILLCD4
+    ,IMGPATH
+    ,SKIN
+  </sql>
+
+  <select id="selectOneById" resultMap="HonorkingsResultMap">
+    SELECT
+      <include refid="select_column_list"></include>
+    FROM 
+      HONORKINGS
+    WHERE
+      ID = #{id}
+  </select>
+
+  <update id="update" parameterType="com.app.model.Honorkings" >
+    UPDATE
+      HONORKINGS
+    <set>
+      <if test="id!=null and id!=''">
+        ID = #{id},
+      </if>
+      <if test="name!=null and name!=''">
+        NAME = #{name},
+      </if>
+      <if test="vocation!=null and vocation!=''">
+        VOCATION = #{vocation},
+      </if>
+      <if test="subvocation!=null and subvocation!=''">
+        SUBVOCATION = #{subvocation},
+      </if>
+      <if test="skillcd1!=null and skillcd1!=''">
+        SKILLCD1 = #{skillcd1},
+      </if>
+      <if test="skillcd2!=null and skillcd2!=''">
+        SKILLCD2 = #{skillcd2},
+      </if>
+      <if test="skillcd3!=null and skillcd3!=''">
+        SKILLCD3 = #{skillcd3},
+      </if>
+      <if test="skillcd4!=null and skillcd4!=''">
+        SKILLCD4 = #{skillcd4},
+      </if>
+      <if test="imgpath!=null and imgpath!=''">
+        IMGPATH = #{imgpath},
+      </if>
+      <if test="skin!=null and skin!=''">
+        SKIN = #{skin},
+      </if>
+    </set>
+    WHERE
+      ID = #{id}
+  </update>
+
+  <insert id="insert" parameterType="com.app.model.Honorkings" >
+    INSERT INTO HONORKINGS(
+    <!-- <trim prefix='(' suffix=')' suffixOverrides=','> -->
+    <include refid="insert_column_list"></include>
+    ) SELECT 
+       #{id}
+      , #{name}
+      , #{vocation}
+      , #{subvocation}
+      , #{skillcd1}
+      , #{skillcd2}
+      , #{skillcd3}
+      , #{skillcd4}
+      , #{imgpath}
+      , #{skin}
+     FROM DUAL 
+     WHERE 1=1 
+     AND NOT EXISTS 
+     (SELECT 1 FROM HONORKINGS
+         WHERE 1=1 )
+     AND ROWNUM = 1
+  </insert>
+
+  <select id="selectOneByUniqueKey" resultMap="HonorkingsResultMap">
+    SELECT
+      <include refid="select_column_list"></include>
+    FROM 
+      HONORKINGS
+    <where>
+    </where>
+  </select>
+
+  <select id="getCountByDto" parameterType="com.app.model.Honorkings" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM HONORKINGS
+    <where>
+      1 = 1
+      <if test="id!=null and id!=''">
+        AND ID = #{id}
+      </if>
+      <if test="name!=null and name!=''">
+        AND NAME = #{name}
+      </if>
+      <if test="vocation!=null and vocation!=''">
+        AND VOCATION = #{vocation}
+      </if>
+      <if test="subvocation!=null and subvocation!=''">
+        AND SUBVOCATION = #{subvocation}
+      </if>
+      <if test="skillcd1!=null and skillcd1!=''">
+        AND SKILLCD1 = #{skillcd1}
+      </if>
+      <if test="skillcd2!=null and skillcd2!=''">
+        AND SKILLCD2 = #{skillcd2}
+      </if>
+      <if test="skillcd3!=null and skillcd3!=''">
+        AND SKILLCD3 = #{skillcd3}
+      </if>
+      <if test="skillcd4!=null and skillcd4!=''">
+        AND SKILLCD4 = #{skillcd4}
+      </if>
+      <if test="imgpath!=null and imgpath!=''">
+        AND IMGPATH = #{imgpath}
+      </if>
+      <if test="skin!=null and skin!=''">
+        AND SKIN = #{skin}
+      </if>
+      <if test="condition!=null and condition!=''">
+        ${condition}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByDto" parameterType="com.app.model.Honorkings" resultMap="HonorkingsResultMap">
+    SELECT
+      <include refid="select_column_list"></include>
+    FROM 
+      HONORKINGS
+    <where>
+      1 = 1
+      <if test="id!=null and id!=''">
+        AND ID = #{id}
+      </if>
+      <if test="name!=null and name!=''">
+        AND NAME = #{name}
+      </if>
+      <if test="vocation!=null and vocation!=''">
+        AND VOCATION = #{vocation}
+      </if>
+      <if test="subvocation!=null and subvocation!=''">
+        AND SUBVOCATION = #{subvocation}
+      </if>
+      <if test="skillcd1!=null and skillcd1!=''">
+        AND SKILLCD1 = #{skillcd1}
+      </if>
+      <if test="skillcd2!=null and skillcd2!=''">
+        AND SKILLCD2 = #{skillcd2}
+      </if>
+      <if test="skillcd3!=null and skillcd3!=''">
+        AND SKILLCD3 = #{skillcd3}
+      </if>
+      <if test="skillcd4!=null and skillcd4!=''">
+        AND SKILLCD4 = #{skillcd4}
+      </if>
+      <if test="imgpath!=null and imgpath!=''">
+        AND IMGPATH = #{imgpath}
+      </if>
+      <if test="skin!=null and skin!=''">
+        AND SKIN = #{skin}
+      </if>
+      <if test="condition!=null and condition!=''">
+        ${condition}
+      </if>
+      LIMIT ${startRow} , ${pageSize}
+    </where>
+  </select>
+
+  <select id="customQuary" parameterType="com.app.model.Honorkings" resultType="com.app.model.Honorkings">
+    SELECT
+       ${selectQuary}
+    FROM
+      HONORKINGS
+    <if test="joinPart!=null">
+        ${joinPart}
+    </if>
+    <where>
+        1 = 1
+        <if test="condition!=null">
+         AND ${condition}
+        </if>
+    </where>
+    <if test="groupBy!=null">
+      GROUP BY ${groupBy}
+    </if>
+    <if test="having!=null">
+      HAVING ${having}
+    </if>
+    <if test="orderBy!=null">
+      ORDER BY ${orderBy}
+    </if>
+  </select>
+
+</mapper>
+

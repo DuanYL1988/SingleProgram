@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//MYBATIS.org//DTD Mapper 3.0//EN" "http://MYBATIS.org/dtd/MYBATIS-3-mapper.dtd" >
+<mapper namespace="com.app.repository.HeroskinRepository" >
+  <!-- ResultMap -->
+  <resultMap id="HeroskinResultMap" type="com.app.model.Heroskin" >
+    <result column="ID" property="id" jdbcType="INTEGER" />
+    <result column="HEROID" property="heroid" jdbcType="INTEGER" />
+    <result column="HERONAME" property="heroname" jdbcType="VARCHAR" />
+    <result column="SKININDEX" property="skinindex" jdbcType="INTEGER" />
+    <result column="SKINNAME" property="skinname" jdbcType="VARCHAR" />
+    <result column="IMGURL" property="imgurl" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="select_column_list">
+    HEROSKIN.ID
+    ,HEROSKIN.HEROID
+    ,HEROSKIN.HERONAME
+    ,HEROSKIN.SKININDEX
+    ,HEROSKIN.SKINNAME
+    ,HEROSKIN.IMGURL
+  </sql>
+
+  <sql id="insert_column_list">
+    ID
+    ,HEROID
+    ,HERONAME
+    ,SKININDEX
+    ,SKINNAME
+    ,IMGURL
+  </sql>
+
+  <select id="selectOneById" resultMap="HeroskinResultMap">
+    SELECT
+      <include refid="select_column_list"></include>
+    FROM 
+      HEROSKIN
+    WHERE
+      ID = #{id}
+  </select>
+
+  <update id="update" parameterType="com.app.model.Heroskin" >
+    UPDATE
+      HEROSKIN
+    <set>
+      <if test="id!=null and id!=''">
+        ID = #{id},
+      </if>
+      <if test="heroid!=null and heroid!=''">
+        HEROID = #{heroid},
+      </if>
+      <if test="heroname!=null and heroname!=''">
+        HERONAME = #{heroname},
+      </if>
+      <if test="skinindex!=null and skinindex!=''">
+        SKININDEX = #{skinindex},
+      </if>
+      <if test="skinname!=null and skinname!=''">
+        SKINNAME = #{skinname},
+      </if>
+      <if test="imgurl!=null and imgurl!=''">
+        IMGURL = #{imgurl},
+      </if>
+    </set>
+    WHERE
+      ID = #{id}
+  </update>
+
+  <insert id="insert" parameterType="com.app.model.Heroskin" >
+    INSERT INTO HEROSKIN(
+    <!-- <trim prefix='(' suffix=')' suffixOverrides=','> -->
+    <include refid="insert_column_list"></include>
+    ) SELECT 
+       #{id}
+      , #{heroid}
+      , #{heroname}
+      , #{skinindex}
+      , #{skinname}
+      , #{imgurl}
+     FROM DUAL 
+     WHERE 1=1 
+     AND NOT EXISTS 
+     (SELECT 1 FROM HEROSKIN
+         WHERE 1=1 )
+     AND ROWNUM = 1
+  </insert>
+
+  <select id="selectOneByUniqueKey" resultMap="HeroskinResultMap">
+    SELECT
+      <include refid="select_column_list"></include>
+    FROM 
+      HEROSKIN
+    <where>
+    </where>
+  </select>
+
+  <select id="getCountByDto" parameterType="com.app.model.Heroskin" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM HEROSKIN
+    <where>
+      1 = 1
+      <if test="id!=null and id!=''">
+        AND ID = #{id}
+      </if>
+      <if test="heroid!=null and heroid!=''">
+        AND HEROID = #{heroid}
+      </if>
+      <if test="heroname!=null and heroname!=''">
+        AND HERONAME = #{heroname}
+      </if>
+      <if test="skinindex!=null and skinindex!=''">
+        AND SKININDEX = #{skinindex}
+      </if>
+      <if test="skinname!=null and skinname!=''">
+        AND SKINNAME = #{skinname}
+      </if>
+      <if test="imgurl!=null and imgurl!=''">
+        AND IMGURL = #{imgurl}
+      </if>
+      <if test="condition!=null and condition!=''">
+        ${condition}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByDto" parameterType="com.app.model.Heroskin" resultMap="HeroskinResultMap">
+    SELECT
+      <include refid="select_column_list"></include>
+    FROM 
+      HEROSKIN
+    <where>
+      1 = 1
+      <if test="id!=null and id!=''">
+        AND ID = #{id}
+      </if>
+      <if test="heroid!=null and heroid!=''">
+        AND HEROID = #{heroid}
+      </if>
+      <if test="heroname!=null and heroname!=''">
+        AND HERONAME = #{heroname}
+      </if>
+      <if test="skinindex!=null and skinindex!=''">
+        AND SKININDEX = #{skinindex}
+      </if>
+      <if test="skinname!=null and skinname!=''">
+        AND SKINNAME = #{skinname}
+      </if>
+      <if test="imgurl!=null and imgurl!=''">
+        AND IMGURL = #{imgurl}
+      </if>
+      <if test="condition!=null and condition!=''">
+        ${condition}
+      </if>
+      LIMIT ${startRow} , ${pageSize}
+    </where>
+  </select>
+
+  <select id="customQuary" parameterType="com.app.model.Heroskin" resultType="com.app.model.Heroskin">
+    SELECT
+       ${selectQuary}
+    FROM
+      HEROSKIN
+    <if test="joinPart!=null">
+        ${joinPart}
+    </if>
+    <where>
+        1 = 1
+        <if test="condition!=null">
+         AND ${condition}
+        </if>
+    </where>
+    <if test="groupBy!=null">
+      GROUP BY ${groupBy}
+    </if>
+    <if test="having!=null">
+      HAVING ${having}
+    </if>
+    <if test="orderBy!=null">
+      ORDER BY ${orderBy}
+    </if>
+  </select>
+
+</mapper>
+

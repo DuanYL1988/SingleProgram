@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- 引入thymeleaf的th标签 -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:include="common/resources.html"></th:block>
+<style>
+footer {
+    position: relative;
+}
+
+.mainFrame {
+    display: inline; position: absolute; margin: 5px 0px 0 15px;; border: 1px solid; border-radius: 10px;
+    width: 1000px; height: 565px;background:#00000063
+}
+</style>
+<!-- 
+    <script type="text/javascript" th:src="@{/js/page/index.js}"></script>
+     -->
+</head>
+
+<body class="azurlane" style="background-size: 1200px 700px; height: 700px; width: 1200px;">
+    <th:block th:include="common/header.html"></th:block>
+    <div style="display: inline-block">
+        <div class="menuBar" style="height: 580px">
+            <div class="parentMenu" th:each="menuGp: ${session.menuList}">
+                <span th:text="${menuGp.key}"></span>
+                <div style="width: 100%" th:each="menu: ${menuGp.value}">
+                    <img th:src="${menu.iconUrl }"></img> <a th:href="${'/'+menu.serverUrl}"><span th:text="${menu.name}"></span> </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mainFrame">
+        <th:block th:replace="fe/list :: content"</th:block>
+    </div>
+
+    <div>
+        <th:block th:include="common/footer.html"></th:block>
+    </div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//MYBATIS.org//DTD Mapper 3.0//EN" "http://MYBATIS.org/dtd/MYBATIS-3-mapper.dtd" >
+<mapper namespace="com.thymeleaf.repository.TableColumnRepository" >
+  <resultMap id="TableColumnResultMap" type="com.thymeleaf.model.TableColumn" >
+    <result column="TABLE_NAME" property="tableName" jdbcType="VARCHAR" />
+    <result column="COLUMN_NAME" property="columnName" jdbcType="VARCHAR" />
+    <result column="COMMENT" property="comment" jdbcType="VARCHAR" />
+    <result column="COLUMN_TYPE" property="columnType" jdbcType="VARCHAR" />
+    <result column="COLUMN_LENGTH" property="columnLength" jdbcType="INTEGER" />
+    <result column="LIST_LENGTH" property="listLength" jdbcType="INTEGER" />
+    <result column="INPUT_TYPE" property="inputType" jdbcType="VARCHAR" />
+    <result column="PK_FLAG" property="pkFlag" jdbcType="VARCHAR" />
+    <result column="UNIQUE_FLAG" property="uniqueFlag" jdbcType="VARCHAR" />
+    <result column="NOTNULL_FLAG" property="notnullFlag" jdbcType="VARCHAR" />
+    <result column="LIST_EDITABLE" property="listEditable" jdbcType="VARCHAR" />
+    <result column="FIFTERABLE" property="fifterable" jdbcType="VARCHAR" />
+    <result column="INSERTABLE" property="insertable" jdbcType="VARCHAR" />
+    <result column="UPDATEABLE" property="updateable" jdbcType="VARCHAR" />
+    <result column="LIST_VISABLE" property="listVisable" jdbcType="VARCHAR" />
+    <result column="PROPERTY_NAME" property="propertyName" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="select_column_list">
+     `TABLE_NAME`
+    , `COLUMN_NAME`
+    , `COMMENT`
+    , `COLUMN_TYPE`
+    , `COLUMN_LENGTH`
+    , `LIST_LENGTH`
+    , `INPUT_TYPE`
+    , `PK_FLAG`
+    , `UNIQUE_FLAG`
+    , `NOTNULL_FLAG`
+    , `LIST_EDITABLE`
+    , `FIFTERABLE`
+    , `INSERTABLE`
+    , `UPDATEABLE`
+    , `LIST_VISABLE`
+    , `PROPERTY_NAME`
+    , `CODE`
+  </sql>
+
+  <select id="selectByDto" parameterType="com.thymeleaf.model.TableColumn" resultMap="TableColumnResultMap">
+    SELECT <include refid="select_column_list"></include> FROM TABLE_INFO
+    <where>
+      <if test="tableName!=null and tableName!=''">
+        AND TABLE_NAME = #{tableName}
+      </if>
+      <if test="columnName!=null and columnName!=''">
+        AND COLUMN_NAME = #{columnName}
+      </if>
+      <if test="comment!=null and comment!=''">
+        AND COMMENT = #{comment}
+      </if>
+      <if test="columnType!=null and columnType!=''">
+        AND COLUMN_TYPE = #{columnType}
+      </if>
+      <if test="columnLength!=null and columnLength!=''">
+        AND COLUMN_LENGTH = #{columnLength}
+      </if>
+      <if test="listLength!=null and listLength!=''">
+        AND LIST_LENGTH = #{listLength}
+      </if>
+      <if test="inputType!=null and inputType!=''">
+        AND INPUT_TYPE = #{inputType}
+      </if>
+      <if test="pkFlag!=null and pkFlag!=''">
+        AND PK_FLAG = #{pkFlag}
+      </if>
+      <if test="uniqueFlag!=null and uniqueFlag!=''">
+        AND UNIQUE_FLAG = #{uniqueFlag}
+      </if>
+      <if test="notnullFlag!=null and notnullFlag!=''">
+        AND NOTNULL_FLAG = #{notnullFlag}
+      </if>
+      <if test="listEditable!=null and listEditable!=''">
+        AND LIST_EDITABLE = #{listEditable}
+      </if>
+      <if test="fifterable!=null and fifterable!=''">
+        AND FIFTERABLE = #{fifterable}
+      </if>
+      <if test="insertable!=null and insertable!=''">
+        AND INSERTABLE = #{insertable}
+      </if>
+      <if test="updateable!=null and updateable!=''">
+        AND UPDATEABLE = #{updateable}
+      </if>
+      <if test="listVisable!=null and listVisable!=''">
+        AND LIST_VISABLE = #{listVisable}
+      </if>
+      <if test="propertyName!=null and propertyName!=''">
+        AND PROPERTY_NAME = #{propertyName}
+      </if>
+      <if test="code!=null and code!=''">
+        AND CODE = #{code}
+      </if>
+    </where>
+    <if test="orderBy!=null">
+      ORDER BY ${orderBy}
+    </if>
+    LIMIT ${startRow} , ${pageSize}
+  </select>
+</mapper>

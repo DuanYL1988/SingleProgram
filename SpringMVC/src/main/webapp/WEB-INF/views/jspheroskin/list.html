@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>HEROSKIN一览</title>
+<link rel="stylesheet" th:href="@{/common.css}" href="../../public/common.css"/>
+<script type="text/javascript" th:src="@{/jquery-3.4.1.min.js}" src="../../public/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" th:src="@{/commonService.js}" src="../../public/commonService.js"></script>
+</head>
+<body >
+    <header>
+    </header>
+    
+    <aside>
+    </aside>
+    
+    <main>
+      <!-- 控制区 -->
+      <form method="post" th:action="search">
+        <div style="height:35px">
+          <button type="button" class="pageBtn" id="pre_page" onclick="doPage('pre')"><</button>
+          <span>Page:</span>
+          <input id="currentPageNo" style="width:25px" th:field="*{inDto.pageNo}" type="text"/>/
+          <span id="maxPageNo" th:text="${inDto.maxPage}"></span>
+          <!--每页表示
+          <select style="width:50px" th:value="${inDto.pageSize}">
+            <option value="10"></option>
+            <option value="15"></option>
+            <option value="20"></option>
+          </select>件-->
+          <button type="button" class="pageBtn" id="after_page" onclick="doPage('next')">></button>
+        </div>
+        <div style="height:35px">
+          <input type='hidden' th:field="*{inDto.actionName}" id='actionName'/>
+          <button type="button" class="" id="saerchBtn" onclick="doSearch()">></button>
+        </div>
+      <!-- 一览表示区 -->
+      <table cellspacing="0" border="1" style="width:3500px">
+        <thead>
+          <tr>
+            <td><input type="checkbox" onclick="selectAll()"/></td>
+            <td></td>
+            <td>英雄</td>
+            <td>名称</td>
+            <td></td>
+            <td>皮肤名</td>
+            <td>图片</td>
+
+            <td>操作</td>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <tr class="searchTr">
+            <td></td>
+            <td><input type='text' th:field="*{inDto.id}" /></td>
+            <td><input type='text' th:field="*{inDto.heroid}" /></td>
+            <td><input type='text' th:field="*{inDto.heroname}" /></td>
+            <td><input type='text' th:field="*{inDto.skinindex}" /></td>
+            <td><input type='text' th:field="*{inDto.skinname}" /></td>
+            <td><input type='text' th:field="*{inDto.imgurl}" /></td>
+
+            <td><button type="button" onclick="doInsert(this)">新建</button></td>
+          </tr>
+          <tr th:each="obj:${resultList}">
+            <td><input type="checkbox"/></td>
+            <td name="id" th:text="${obj.id}" th:onclick="openDetail('heroskin',this)"></td>
+            <td name="heroid" th:text="${obj.heroid}"></td>
+            <td name="heroname" th:text="${obj.heroname}"></td>
+            <td name="skinindex" th:text="${obj.skinindex}"></td>
+            <td name="skinname" th:text="${obj.skinname}"></td>
+            <td name="imgurl" th:text="${obj.imgurl}"></td>
+
+            <td><button type="button" onclick="doUpdate(this,'heroskin')">更新</button></td>
+          </tr>
+        </tbody>
+      </table>
+      </form>
+    </main>
+    
+</body>
+</html>
+
+

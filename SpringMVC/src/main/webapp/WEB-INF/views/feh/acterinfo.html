@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Title</title>
+<head th:replace="~{feh/resources :: header}"></head>
+<style type="text/css">
+body {
+  background-color: rgba(27, 208, 153, 0.59)
+}
+
+table {
+  width: 100%; border: 1px solid black; border-collapse: collapse;
+}
+
+td {
+  border: 1px solid black; width: 10%; height: 40px;
+}
+
+.moveType {
+  margin-left: 30px; margin-top: -10px; width: 40px; height: 40px
+}
+
+.inputSelect {
+  position: relative;
+}
+
+select {
+  width: 80%; height: 85%;
+}
+
+input {
+  width: 70%; height: 80%;
+}
+
+.input {
+  position: absolute; z-index: 2; top: 4px; height: 80%;
+}
+
+.select {
+  position: absolute; z-index: 1; top: 2px; height: 75%;
+}
+
+.number {
+  width: 10%;
+}
+</style>
+<script th:inline="javascript">
+  var mapObj = [[${form.skillMap}]];
+  var weaponList = [[${form.weaponType}]];
+</script>
+<script src="../../../resources/js/feh/acterinfo.js" th:src="@{/resources/js/feh/acterinfo.js}"></script>
+
+</head>
+<body>
+  <div class="container-scroller">
+    <!-- 头部导航-->
+    <header th:replace="~{feh/topNav :: header}"></header>
+    <div class="container-fluid page-body-wrapper">
+      <!-- 左侧头部导航-->
+      <nav th:replace="~{feh/leftNav :: sidebar}"></nav>
+      <div class="main-panel">
+        <!-- 主要内容写在这里面 -->
+        <div class="row">
+          <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">人物登陆</h4>
+                <form id="feh-character-form" class="forms-sample" th:object="${form}">
+                  <input type="hidden" th:value="${form.charActer.id}" th:name="charActer.id" />
+                  <table>
+                    <tr>
+                      <td rowspan="5" colspan="2" align="center">
+                        <img id="faceImg" style="width: 200px; height: 200px" src="../../../resources/images/feh/acter/Camilla_F_Misuki/face.png">
+                      </td>
+                      <td colspan="6">
+                        <div class="form-group">
+                        <label>角色图目录</label>
+                        <input type="file" name="img[]" class="file-upload-default">
+                        <div class="input-group col-xs-12">
+                        <input type="text" id="imagePath" class="form-control file-upload-info" th:name="charActer.faceImg" th:value="${form.charActer.faceImg}" /> <span class="input-group-append">
+                        <button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
+                        </span>
+                        </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="width: 5%" align="right">作品：</td>
+                      <td style="width: 12%"><select name="charActer.origin" id="acterOrigin" dyl:options="0004"></select></td>
+                      <td style="width: 5%" align="right">角色：</td>
+                      <td style="width: 15%" class="inputSelect">
+                        <input class="input" type="text" th:name="charActer.basename" th:value="${form.charActer.basename}">
+                        <select id="acterName" class="inputSelect">
+                          <option></option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="width: 5%" align="right">称号：</td>
+                      <td style="width: 12%"><input type="text" th:name="charActer.titlename" th:value="${form.charActer.titlename}" placeholder="角色称号"></td>
+                      <td style="width: 5%" align="right">别名：</td>
+                      <td style="width: 12%"><input type="text" th:name="charActer.name" th:value="${form.charActer.name}" placeholder="别名"></td>
+                    </tr>
+                    <tr>
+                      <td style="width: 5%" align="right">突破数：</td>
+                      <td style="width: 12%"><input type="text" th:name="charActer.levelPlus" th:value="${form.charActer.levelPlus}" placeholder="0"></td>
+                      <td style="width: 5%" align="right">武器类型：</td>
+                      <td style="width: 12%" class="inputSelect"><input class="input" type="text" th:name="charActer.weaponType" th:value="${form.charActer.weaponType}"> <select
+                        id="characterWeaponType">
+                          <option></option>
+                      </select></td>
+                    </tr>
+                    <tr>
+                      <td style="width: 5%" align="right">移动类型：</td>
+                      <td style="width: 12%"></td>
+                      <td style="width: 5%" align="right">种族：</td>
+                      <td style="width: 12%"></td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                      <td colspan="6" align="middle">H P：<input type="text" class="number" th:name="charActer.hp" th:value="${form.charActer.hp}" /> 攻击：<input type="text" class="number"
+                        th:name="charActer.att" th:value="${form.charActer.att}" /> 速度：<input type="text" class="number" th:name="charActer.spd" th:value="${form.charActer.spd}" /> 防守：<input
+                        type="text" class="number" th:name="charActer.def" th:value="${form.charActer.def}" /> 魔防：<input type="text" class="number" th:name="charActer.mdf"
+                        th:value="${form.charActer.mdf}" />
+                      </td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                      <td style="width: 5%" align="right">武器：</td>
+                      <td style="width: 12%" class="inputSelect">
+                        <input class="input" type="text" th:name="charActer.weapon" th:value="${form.charActer.weapon}">
+                        <select id="characterWeapon" class="inputSelect">
+                          <option></option>
+                        </select>
+                      </td>
+                      <td style="width: 5%" align="right">辅助：</td>
+                      <td style="width: 12%" class="inputSelect">
+                        <input class="input" type="text" th:name="charActer.skillS" th:value="${form.charActer.skillS}"> 
+                        <select id="characterSkillS" class="inputSelect">
+                          <option></option>
+                        </select>
+                      </td>
+                      <td style="width: 5%" align="right">必杀：</td>
+                      <td style="width: 12%" class="inputSelect">
+                        <input class="input" type="text" th:name="charActer.skillE" th:value="${form.charActer.skillE}">
+                        <select id="characterSkillE"  class="inputSelect">
+                          <option></option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="width: 5%" align="right">A技能：</td>
+                      <td style="width: 12%" class="inputSelect">
+                        <input class="input" type="text" th:name="charActer.skillA" th:value="${form.charActer.skillA}">
+                        <select id="characterSkillA" class="inputSelect">
+                          <option></option>
+                        </select>
+                      </td>
+                      <td style="width: 5%" align="right">B技能：</td>
+                      <td style="width: 12%" class="inputSelect">
+                        <input class="input" type="text" th:name="charActer.skillB" th:value="${form.charActer.skillB}"> 
+                        <select id="characterSkillB" class="inputSelect">
+                          <option></option>
+                        </select>
+                      </td>
+                      <td style="width: 5%" align="right">C技能：</td>
+                      <td style="width: 12%" class="inputSelect">
+                        <input class="input" type="text" th:name="charActer.skillC" th:value="${form.charActer.skillC}"> 
+                        <select id="characterSkillC" class="inputSelect">
+                          <option></option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="width: 5%" align="right">兵种：</td>
+                      <td style="width: 12%"><select name="charActer.moveType" id="acterMoveType" dyl:options="0004"></select></td>
+                      <td style="width: 5%" align="right">祝福：</td>
+                      <td style="width: 12%"><select name="charActer.blessing" id="acterBlessing" dyl:options="0004"></select></td>
+                      <td style="width: 5%" align="right">颜色：</td>
+                      <td style="width: 12%"><select name="charActer.color" id="acterColor" dyl:options="0004"></select></td>
+                    </tr>
+                  </table>
+                  <button type="button" class="btn btn-gradient-primary mr-2" id="submitForm">Submit</button>
+                  <button class="btn btn-light">Cancel</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
