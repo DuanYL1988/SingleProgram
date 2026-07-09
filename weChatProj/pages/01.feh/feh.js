@@ -1,28 +1,16 @@
-import jsonData from './data'
+import jsonData from './dataList'
 import util from '../../common/util'
 
 const IMG_HOST = "https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/";
-const QQ_HOSTS = ["http://photogz.photo.store.qq.com/psc?/V51v220v2C0E493HVi1R4bhVpB2uqOS1/bqQfVz5yrrGYSXMvKr"
-      ,"http://photogz.photo.store.qq.com/psc?/V51v220v2C0E493HVi1R4bhVpB2uqOS1/"
-      ,"http://m.qpic.cn/psc?/V51v220v2C0E493HVi1R4bhVpB2uqOS1/bqQfVz5yrrGYSXMvKr"]
-const HOST_ENDS = ["!/b&bo=sASgBUAGgAcDZ5I","!/b&bo=sARYBUAGIAcDZ8o","!/b&bo=sARYBUAGIAcDhyo","!/b&bo=sARYBUAGIAcDd9o"
-,"!/b&bo=sARYBUAGIAcDV*o","!/b&bo=sARYBUAGIAcDB6o","!/b&bo=sASgBUAGgAcDB*I","!/b&bo=sARYBUAGIAcDR.o"
-,"!/b&bo=sASgBUAGgAcDR7I","!/b&bo=sASgBUAGgAcDV6I","!/b&bo=sASgBUAGgAcDd4I","!/b&bo=ggMABIIDAAQDByI"
-,"!/b&bo=ggMABIIDAAQDR2I","!/b&bo=ggMABIIDAAQDZ0I","!/b&bo=ggMABIIDAAQDV3I","!/b&bo=VQMABFUDAAQDByI"
-,"!/b&bo=VQMABFUDAAQDNxI","!/b&bo=QAaAB0AGgAcDR2I","!/b&bo=VQMABFUDAAQDR2I","!/b&bo=ggMABIIDAAQDNxI"
-,"!/b&bo=sASgBUAGgAcDh3I","!/b&bo=QAYgB0AGIAcDV3I","!/b&bo=HASvBBwErwQDZ0I","!/b&bo=HASvBBwErwQDV3I"]
-
 var searchCondition = {}
-var initCols = [
-  {"name":"faceImgUrl","type":"single"}
-]
-const dataList = util.initList(IMG_HOST, jsonData.HERO, initCols, "imgName", "releaseDate desc");
+const dataList = initList(jsonData.DATA_LIST);
 
 // 获取应用实例
 Page({
   data: {
+    imgHost: IMG_HOST,
     bannerImages : [],
-    fireEmblemHeros : dataList,
+    fireEmblemHeros : initFirstList(),
     // 集合数据
     moveType : util.getDirInfo({"page":"fe","categoryId":"move"}),
     weaponType : util.getDirInfo({"page":"fe","categoryId":"weapon"}),
@@ -37,24 +25,22 @@ Page({
     this.setData({
     })
   },
-
   /* 取得关联数据 */
   getJoinData(e) {
     let hero = e.target.dataset.hero
     let joinId = hero.name
-    let resultList = util.fifterList(jsonData.HERO,{'name' : joinId})
+    let resultList = util.fifterList(dataList,{'name' : joinId})
     this.setData({
       joinList : resultList,
-      bannerImages : editStageImg(hero.stageImg)
+      bannerImages : hero.stageImg
     })
     util.scrollToBottom("bannerIllm")
   },
-  /* 火纹立绘 */
-  showFeHero(e) {
-    // 初始化
+  /* 点击同名其他英雄头像 */
+  showFeHero(e){
     let hero = e.target.dataset.hero
     this.setData({
-      bannerImages : editStageImg(hero.stageImg)
+      bannerImages : hero.stageImg
     })
   },
   /* 检索数据 */
@@ -63,7 +49,7 @@ Page({
     let resultList = []
     if ('clean' !== key ) {
       searchCondition[e.target.dataset.key] = e.target.dataset.value
-      resultList = util.filterLikeList(jsonData.HERO,searchCondition)
+      resultList = util.fifterList(dataList,searchCondition)
     } else {
       searchCondition = {}
       resultList = dataList
@@ -85,27 +71,33 @@ Page({
   },
 })
 
-function editStageImg(stageImg){
-  // stageImg[0] = stageImg[0] + "_Face.webp"
-  // stageImg[1] = stageImg[1] + "_BtlFace.webp"
-  // stageImg[2] = stageImg[2] + "_BtlFace_C.webp"
-  // stageImg[3] = stageImg[3] + "_BtlFace_D.webp"
+function initList(dataList){
+  let result = []
+  console.log(dataList.length)
+  for(let i = 0; i < dataList.length; i++) {
+    result.push(editData(dataList[i]))
+  }
+  return result
+}
 
-  // QQ空间图片地址
-  for(let i = 0; i < QQ_HOSTS.length; i++) {
-    let replaceKey = "{key" + (i + 2) + "}"
-    stageImg[0] = stageImg[0].replace(replaceKey,QQ_HOSTS[i])
-    stageImg[1] = stageImg[1].replace(replaceKey,QQ_HOSTS[i])
-    stageImg[2] = stageImg[2].replace(replaceKey,QQ_HOSTS[i])
-    stageImg[3] = stageImg[3].replace(replaceKey,QQ_HOSTS[i])
+function editData(data){
+  if (data.faceImg.indexOf(data.imgName) < 0) {
+    data.faceImg = IMG_HOST + data.faceImg + data.imgName + "_Face_FC.webp"
+    data.skillList[2] = IMG_HOST + data.skillList[2]
+    data.skillList[4] = IMG_HOST + data.skillList[4]
+    data.skillList[6] = IMG_HOST + data.skillList[6]
+    data.stageImg[0] = IMG_HOST + data.stageImg[0] + data.imgName + "_Face.webp"
+    data.stageImg[1] = IMG_HOST + data.stageImg[1] + data.imgName + "_BtlFace.webp"
+    data.stageImg[2] = IMG_HOST + data.stageImg[2] + data.imgName + "_BtlFace_C.webp"
+    data.stageImg[3] = IMG_HOST + data.stageImg[3] + data.imgName + "_BtlFace_D.webp"
   }
-  for(let i = 0; i< HOST_ENDS.length; i++) {
-    let replaceKey = "{end" + i + "}"
-    let replaceStr = HOST_ENDS[i] + "!&rf=viewer_4"
-    stageImg[0] = stageImg[0].replace(replaceKey,replaceStr)
-    stageImg[1] = stageImg[1].replace(replaceKey,replaceStr)
-    stageImg[2] = stageImg[2].replace(replaceKey,replaceStr)
-    stageImg[3] = stageImg[3].replace(replaceKey,replaceStr)
+  return data
+}
+
+function initFirstList(){
+  let resultList = []
+  for(let i = 0; i < 10; i++) {
+    resultList.push(dataList[i])
   }
-  return stageImg
+  return resultList
 }

@@ -7,13 +7,6 @@
     </block>
   </view>
 
-  <view>
-    <label>颜色 : </label>
-    <block wx:for="{{colorList}}" wx:key="index">
-      <image class="searchIcon" src="{{item.imgSrc}}" mut-bind:tap="doSearch" data-key="color" data-value="{{item.param}}" />
-    </block>
-  </view>
-
   <view style="margin-top: 10rpx;">
     <label>游戏:</label>
     <block wx:for="{{enteyList}}" wx:key="index">
@@ -38,29 +31,28 @@
   <block wx:for="{{fireEmblemHeros}}" wx:key="index">
     <view class="card">
       <view class="faceIcon" mut-bind:tap="getJoinData" data-hero="{{item}}" >
-        <image class="faceImg" src="{{item.faceImgUrl}}" />
+        <image class="faceImg" src="{{item.faceImg}}" />
         <image class="infoIcon" style="left: 5rpx;top:135rpx; width: 50rpx;height: 50rpx;" src="{{moveIcon[item.moveType].imgSrc}}" />
         <image class="infoIcon" style="left: -5rpx;width: 60rpx;height: 60rpx;" src="{{weaponIcon[item.weaponType].imgSrc}}" />
       </view>
       <view class="infoArea">
         <view class="card-line">
           <label class="title">{{item.titleName}}</label>
-          <label class="name">{{item.nameCn}}</label>
+          <label class="name">{{item.name}}</label>
         </view>
         <view class="card-line">
-          <label class="weapon-name">{{item.weapon}}</label>
+          <label class="weapon-name">{{item.skillList[0]}}</label>
         </view>
         <view class="card-line detailAttr">
           <label>HP:{{item.hp}} 攻击:{{item.atk}} 速度:{{item.spd}} 防御:{{item.def}} 魔防:{{item.res}} </label>
         </view>
         <view class="card-line detailAttr">
-          <label>A:{{item.skillCd[0]}} B:{{item.skillCd[1]}}</label>
+          <label wx:if="{{''!==item.skillList[1]}}"><image class="skillIcon" src="{{item.skillList[2]}}" />{{item.skillList[1]}} </label>
+          <label wx:if="{{''!==item.skillList[3]}}"><image class="skillIcon" src="{{item.skillList[4]}}" />{{item.skillList[3]}}</label>
         </view>
-        <view class="card-line detailAttr">
-          <label>C:{{item.skillCd[2]}} E:{{item.skillCd[4]}}</label>
-        </view>
-        <view class="card-line detailAttr">
-          <label>{{item.releaseDate}}</label>
+        <view class="card-line detailAttr" style="margin-top:10rpx">
+          <label><image class="skillIcon" src="{{item.skillList[6]}}" />{{item.skillList[5]}} </label>
+          <label><image class="skillIcon" src="{{imgHost + '2/25/Icon_Skill_Special.png'}}" />{{item.skillList[8]}}</label>
         </view>
       </view>
     </view>
@@ -71,7 +63,7 @@
 <view style="position: relative;">
   <view class="skinList">
     <block wx:for="{{joinList}}" wx:key="index">
-      <image class="iconImg" src="{{item.faceImgUrl}}" mut-bind:tap="showFeHero" data-hero="{{item}}" />
+      <image class="iconImg" src="{{item.faceImg}}" mut-bind:tap="showFeHero" data-hero="{{item}}" />
     </block>
   </view>
 

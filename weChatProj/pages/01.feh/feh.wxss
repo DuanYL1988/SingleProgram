@@ -12,6 +12,13 @@
   height: 40rpx;
 }
 
+.skillIcon {
+  width: 40rpx;
+  height: 40rpx;
+  position: relative;
+  top: 10rpx;
+}
+
 .searchIcon {
   margin-bottom: -13rpx;
   margin-left: 5rpx;
