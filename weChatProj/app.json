@@ -3,10 +3,12 @@
     "pages/00.index/index",
     "pages/01.feh/feh",
     "pages/02.fgo/index",
-    "pages/03.azurlane/azurlane",
-    "pages/04.glanblueFantasy/index",
+    "pages/03.arknight/index",
+    "pages/04.wuthering/index",
+    "pages/11.azurlane/azurlane",
+    "pages/12.glanblueFantasy/index",
     "pages/logs/logs",
-    "pages/sample/sample"
+    "pages/sample/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
