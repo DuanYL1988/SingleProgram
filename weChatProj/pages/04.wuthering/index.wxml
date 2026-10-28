@@ -1,2 +1,50 @@
-<!--pages/sample/sample.wxml-->
-<text>鸣潮</text>
+<view class="page-shell">
+
+  <view class="feature-card">
+    <view class="feature-copy">
+      <text class="feature-name">{{selected.nameCn}}</text>
+      <view class="feature-badges">
+        <view class="feature-badge"><image wx:if="{{selected.attributeIcon}}" src="{{selected.attributeIcon}}" mode="aspectFit" /><text>{{selected.attributeName}}</text></view>
+        <view class="feature-badge"><image wx:if="{{selected.weaponIcon}}" src="{{selected.weaponIcon}}" mode="aspectFit" /><text>{{selected.weaponName}}</text></view>
+        <text class="faction-badge">{{selected.influence}}</text>
+        <text wx:if="{{selected.birthPlace}}" class="faction-badge">{{selected.birthPlace}}</text>
+      </view>
+    </view>
+
+    <view class="art-stage" bindtap="previewArtwork">
+      <image wx:if="{{selected.images.length}}" class="stage-art" mode="aspectFit" src="{{selected.images[artIndex].url}}" lazy-load />
+      <view class="art-vignette"></view>
+      <view wx:if="{{selected.images.length}}" class="art-caption"><text>{{selected.images[artIndex].label}} · {{selected.releaseDate}}</text><text>↗</text></view>
+      <view wx:else class="art-empty">暂无图片</view>
+    </view>
+
+    <view wx:if="{{selected.images.length}}" class="art-gallery">
+      <text class="gallery-heading">角色图片 <text>{{selected.images.length}}</text></text>
+      <scroll-view class="gallery-scroll" scroll-x>
+        <view class="gallery-row">
+          <view wx:for="{{selected.images}}" wx:key="index" class="gallery-thumb {{artIndex === index ? 'gallery-active' : ''}}" data-index="{{index}}" bindtap="selectArtwork"><image src="{{item.url}}" mode="aspectFill" lazy-load /><view>{{item.label}}</view></view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <view class="roster-heading"><view><text class="section-kicker">SOLARIS-3 RESONATORS</text><text class="section-title">共鸣者档案</text></view><text class="result-count">{{resultCount}} 位共鸣者</text></view>
+
+  <view class="search-box"><text class="search-icon">⌕</text><input value="{{query}}" placeholder="搜索角色、属性、阵营" placeholder-class="search-placeholder" confirm-type="search" bindinput="onSearchInput" /><text wx:if="{{query}}" class="clear-search" bindtap="clearSearch">清除</text></view>
+
+  <text class="filter-label">属性</text>
+  <scroll-view class="filter-scroll" scroll-x><view class="filter-row"><view wx:for="{{attributes}}" wx:key="index" class="filter-chip {{selectedAttribute === item ? 'filter-active' : ''}}" data-value="{{item}}" bindtap="selectAttribute">{{item}}</view></view></scroll-view>
+  <text class="filter-label weapon-label">武器</text>
+  <scroll-view class="filter-scroll" scroll-x><view class="filter-row"><view wx:for="{{weapons}}" wx:key="index" class="filter-chip {{selectedWeapon === item ? 'filter-active' : ''}}" data-value="{{item}}" bindtap="selectWeapon">{{item}}</view></view></scroll-view>
+
+  <view wx:if="{{resonators.length}}" class="operator-grid">
+    <view wx:for="{{resonators}}" wx:key="_key" class="operator-card {{selected.id === item.id ? 'operator-selected' : ''}}" data-index="{{index}}" bindtap="selectResonator">
+      <view class="card-image-wrap"><image wx:if="{{item.faceUrl}}" class="operator-face" src="{{item.faceUrl}}" mode="aspectFill" lazy-load /><view class="card-rarity">{{item.rarityStars}}★</view><view class="card-attribute"><image wx:if="{{item.attributeIcon}}" src="{{item.attributeIcon}}" mode="aspectFit" /></view></view>
+      <view class="operator-info"><text class="operator-name">{{item.nameCn}}</text><text class="operator-class">{{item.attributeName}} · {{item.weaponName}}</text></view>
+    </view>
+  </view>
+  <view wx:else class="empty-state"><text class="empty-symbol">⌕</text><text>没有找到符合条件的共鸣者</text></view>
+
+  <button wx:if="{{hasMore}}" class="load-more" bindtap="loadMore">加载更多　·　{{shownCount}} / {{resultCount}}</button>
+  <view class="footer-note">BLACK SHORES · RESONATOR DATABASE</view>
+</view>

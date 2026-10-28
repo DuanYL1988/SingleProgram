@@ -1,3 +1,8 @@
 {
-  "usingComponents": {}
+  "usingComponents": {},
+  "navigationBarTitleText": "鸣潮 · 共鸣者档案",
+  "navigationBarBackgroundColor": "#101411",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#101411",
+  "enablePullDownRefresh": false
 }

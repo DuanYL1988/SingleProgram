@@ -1,2 +1,56 @@
-<!--pages/sample/sample.wxml-->
-<text>明日方舟</text>
+<view class="page-shell">
+  <view class="topline"><view class="topline-mark"></view><text>RHODES ISLAND · OPERATOR ARCHIVE</text><text class="topline-count">{{totalCount}} OPERATORS</text></view>
+
+  <view class="feature-card">
+    <view class="feature-copy">
+      <text class="eyebrow">RHODES ISLAND PERSONNEL FILE</text>
+      <text class="feature-name">{{selected.nameCn}}</text>
+      <view class="feature-meta"><text>{{selected.vocation}}</text><text class="meta-dot">·</text><text>{{selected.subVocation}}</text></view>
+      <view class="rarity"><text wx:for="{{selected.rarityStars}}" wx:key="index">★</text><text class="rarity-label">ELITE {{selectedStage ? '02' : '01'}}</text></view>
+      <view class="feature-tags"><text>{{selected.influence}}</text><text>{{selected.id}}</text></view>
+    </view>
+    <view class="art-stage" bindtap="previewArtwork">
+      <image class="stage-art" mode="aspectFit" src="{{selectedSkin >= 0 ? selected.skinUrls[selectedSkin] : (selectedStage ? selected.stageTwoUrl : selected.stageOneUrl)}}" lazy-load />
+      <view class="art-vignette"></view>
+      <view class="art-caption"><text>OFFICIAL ILLUSTRATION</text><text>↗</text></view>
+    </view>
+    <view class="stage-switch">
+      <view class="stage-option {{selectedStage === 0 && selectedSkin < 0 ? 'active' : ''}}" data-stage="0" bindtap="selectStage"><text>01</text><text>精英一</text></view>
+      <view class="stage-option {{selectedStage === 1 && selectedSkin < 0 ? 'active' : ''}}" data-stage="1" bindtap="selectStage"><text>02</text><text>精英二</text></view>
+      <view class="stage-hint">点击立绘查看大图</view>
+    </view>
+    <view wx:if="{{selected.skinUrls.length}}" class="skin-strip">
+      <text class="skin-heading">时装</text>
+      <scroll-view class="skin-scroll" scroll-x>
+        <view class="skin-row">
+          <view class="skin-chip {{selectedSkin === -1 ? 'skin-active' : ''}}" bindtap="selectStage" data-stage="{{selectedStage}}">默认</view>
+          <view wx:for="{{selected.skinUrls}}" wx:key="index" class="skin-chip {{selectedSkin === index ? 'skin-active' : ''}}" data-index="{{index}}" bindtap="selectSkin">
+            <image wx:if="{{selected.skinIcon[index]}}" src="{{'https://static.wikia.nocookie.net/arknights/images/' + selected.skinIcon[index]}}" mode="aspectFill" />
+            <text>{{selected.skinNames[index] || ('时装 ' + (index + 1))}}</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <view class="roster-heading"><view><text class="section-kicker">FIELD OPERATORS</text><text class="section-title">干员档案</text></view><text class="result-count">{{resultCount}} 位干员</text></view>
+
+  <view class="search-box"><text class="search-icon">⌕</text><input value="{{query}}" placeholder="搜索干员、职业、阵营" placeholder-class="search-placeholder" confirm-type="search" bindinput="onSearchInput" /><text wx:if="{{query}}" class="clear-search" bindtap="clearSearch">清除</text></view>
+
+  <scroll-view class="vocation-scroll" scroll-x>
+    <view class="vocation-row">
+      <view wx:for="{{vocations}}" wx:key="index" class="vocation-chip {{selectedVocation === item ? 'vocation-active' : ''}}" data-value="{{item}}" bindtap="selectVocation">{{item}}</view>
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{operators.length}}" class="operator-grid">
+    <view wx:for="{{operators}}" wx:key="_key" class="operator-card {{selected.id === item.id ? 'operator-selected' : ''}}" data-index="{{index}}" bindtap="selectOperator">
+      <view class="card-image-wrap"><image class="operator-face" src="{{item.faceUrl}}" mode="aspectFill" lazy-load /><view class="card-rarity">{{item.rarityStars}}★</view><view class="card-code">{{item.id}}</view></view>
+      <view class="operator-info"><text class="operator-name">{{item.nameCn}}</text><text class="operator-class">{{item.subVocation || item.vocation}}</text></view>
+    </view>
+  </view>
+  <view wx:else class="empty-state"><text class="empty-symbol">⌕</text><text>没有找到符合条件的干员</text></view>
+
+  <button wx:if="{{hasMore}}" class="load-more" bindtap="loadMore">加载更多　·　{{shownCount}} / {{resultCount}}</button>
+  <view class="footer-note">RHODES ISLAND · PERSONNEL MANAGEMENT SYSTEM</view>
+</view>
