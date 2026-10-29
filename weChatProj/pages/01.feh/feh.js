@@ -14,12 +14,10 @@ Page({
     // 集合数据
     moveType : util.getDirInfo({"page":"fe","categoryId":"move"}),
     weaponType : util.getDirInfo({"page":"fe","categoryId":"weapon"}),
-    colorList : util.getDirInfo({"page":"fe","categoryId":"color"}),
     enteyList : util.getDirInfo({"page":"fe","categoryId":"entry"}),
     // 单个数据
     moveIcon : util.getCodeListByCategory({"page":"fe","categoryId":"move"},"param"),
     weaponIcon : util.getCodeListByCategory({"page":"fe","categoryId":"weapon"},"param"),
-    colorIcon : util.getCodeListByCategory({"page":"fe","categoryId":"color"},"param")
   },
   onLoad() {
     this.setData({
@@ -28,8 +26,8 @@ Page({
   /* 取得关联数据 */
   getJoinData(e) {
     let hero = e.target.dataset.hero
-    let joinId = hero.name
-    let resultList = util.fifterList(dataList,{'name' : joinId})
+    let joinId = hero.imgName.split('_')[0] + '_'
+    let resultList = util.fifterList(dataList,{'imgName' : joinId})
     this.setData({
       joinList : resultList,
       bannerImages : hero.stageImg
@@ -73,7 +71,6 @@ Page({
 
 function initList(dataList){
   let result = []
-  console.log(dataList.length)
   for(let i = 0; i < dataList.length; i++) {
     result.push(editData(dataList[i]))
   }

@@ -2,20 +2,24 @@
 
   <view class="feature-card">
     <view class="feature-copy">
-      <text class="feature-name">{{selected.nameCn}}</text>
-      <view class="feature-badges">
-        <view class="feature-badge"><image wx:if="{{selected.attributeIcon}}" src="{{selected.attributeIcon}}" mode="aspectFit" /><text>{{selected.attributeName}}</text></view>
-        <view class="feature-badge"><image wx:if="{{selected.weaponIcon}}" src="{{selected.weaponIcon}}" mode="aspectFit" /><text>{{selected.weaponName}}</text></view>
-        <text class="faction-badge">{{selected.influence}}</text>
-        <text wx:if="{{selected.birthPlace}}" class="faction-badge">{{selected.birthPlace}}</text>
+      <view class="feature-heading">
+        <text class="feature-name">{{selected.nameCn}}</text>
+        <view class="feature-badges">
+          <view class="feature-badge"><image wx:if="{{selected.attributeIcon}}" src="{{selected.attributeIcon}}" mode="aspectFit" /><text>{{selected.attributeName}}</text></view>
+          <view class="feature-badge"><image wx:if="{{selected.weaponIcon}}" src="{{selected.weaponIcon}}" mode="aspectFit" /><text>{{selected.weaponName}}</text></view>
+          <text wx:if="{{selected.influence}}" class="faction-badge">{{selected.influence}}</text>
+          <text wx:if="{{selected.birthPlace}}" class="faction-badge">{{selected.birthPlace}}</text>
+        </view>
       </view>
     </view>
 
-    <view class="art-stage" bindtap="previewArtwork">
-      <image wx:if="{{selected.images.length}}" class="stage-art" mode="aspectFit" src="{{selected.images[artIndex].url}}" lazy-load />
+    <view class="art-stage">
+      <swiper wx:if="{{selected.images.length}}" class="art-swiper" current="{{artIndex}}" duration="280" bindchange="onArtworkSwiperChange">
+        <swiper-item wx:for="{{selected.images}}" wx:key="index" class="art-swiper-item">
+          <view class="art-image-hit" data-index="{{index}}" bindtap="previewArtwork"><image class="stage-art" mode="aspectFit" src="{{item.url}}" lazy-load /></view>
+        </swiper-item>
+      </swiper>
       <view class="art-vignette"></view>
-      <view wx:if="{{selected.images.length}}" class="art-caption"><text>{{selected.images[artIndex].label}} · {{selected.releaseDate}}</text><text>↗</text></view>
-      <view wx:else class="art-empty">暂无图片</view>
     </view>
 
     <view wx:if="{{selected.images.length}}" class="art-gallery">
@@ -47,4 +51,9 @@
 
   <button wx:if="{{hasMore}}" class="load-more" bindtap="loadMore">加载更多　·　{{shownCount}} / {{resultCount}}</button>
   <view class="footer-note">BLACK SHORES · RESONATOR DATABASE</view>
+</view>
+
+<view wx:if="{{showImagePreview}}" class="image-preview" catchtouchmove="noop" bindtap="closeImagePreview">
+  <image class="preview-art" src="{{previewImageSrc}}" mode="aspectFit" catchtap="noop" />
+  <view class="preview-close" catchtap="closeImagePreview">关闭　×</view>
 </view>

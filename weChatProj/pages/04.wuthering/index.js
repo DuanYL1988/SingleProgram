@@ -6,10 +6,10 @@ const PAGE_SIZE = 30
 
 function imageUrl(path) {
   if (!path || path === "''" || path.indexOf('http') === 0) return ''
-  return IMG_HOST + path
+  return IMG_HOST + path + "/revision/latest"
 }
 
-const ALL_RESONATORS = source.DATA_LIST.map((item, index) => {
+const RESONATOR_LIST = source.DATA_LIST.map((item, index) => {
   const images = []
   const imageFields = [
     { key: 'cardImg', label: '角色卡面' },
@@ -37,12 +37,18 @@ const ALL_RESONATORS = source.DATA_LIST.map((item, index) => {
     rarityStars: Math.max(1, Math.min(5, parseInt(item.rarity, 10) || 4))
   })
 })
+const DEFAULT_RESONATOR = RESONATOR_LIST.find(item => item.name === 'Hsin') || RESONATOR_LIST[0]
+const ALL_RESONATORS = DEFAULT_RESONATOR
+  ? [DEFAULT_RESONATOR].concat(RESONATOR_LIST.filter(item => item !== DEFAULT_RESONATOR))
+  : RESONATOR_LIST
 
 Page({
   data: {
     resonators: ALL_RESONATORS.slice(0, PAGE_SIZE),
-    selected: ALL_RESONATORS[0],
+    selected: DEFAULT_RESONATOR,
     artIndex: 0,
+    showImagePreview: false,
+    previewImageSrc: '',
     query: '',
     selectedAttribute: '全部属性',
     selectedWeapon: '全部武器',
@@ -112,10 +118,30 @@ Page({
     this.setData({ artIndex: Number(e.currentTarget.dataset.index) })
   },
 
-  previewArtwork() {
+  onArtworkSwiperChange(e) {
+    this.setData({ artIndex: e.detail.current })
+  },
+
+  previewArtwork(e) {
     const item = this.data.selected
     const images = item.images || []
-    const urls = images.map(image => image.url)
-    if (urls.length) wx.previewImage({ current: urls[this.data.artIndex] || urls[0], urls, referrerPolicy: 'no-referrer' })
+    const index = e && e.currentTarget.dataset.index !== undefined
+      ? Number(e.currentTarget.dataset.index)
+      : this.data.artIndex
+    const current = images[index]
+    if (current) this.setData({ showImagePreview: true, previewImageSrc: current.url })
+  },
+
+  closeImagePreview() {
+    this.setData({ showImagePreview: false, previewImageSrc: '' })
+  },
+
+  noop() {
+  },
+
+  onBackPress() {
+    if (!this.data.showImagePreview) return false
+    this.closeImagePreview()
+    return true
   }
 })
